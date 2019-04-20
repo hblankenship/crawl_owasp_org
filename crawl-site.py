@@ -58,23 +58,11 @@ def crawl_site(pages, index):
 
     return pages
 
-def valid_page(pagename):
-    result = True
-    if pagename.find("Template:") > -1:
-        result = False
-    if result and pagename.find("Special:") > -1:
-        result = False
-    if result and pagename.find("File:") > -1:
-        result = False
-    if result and pagename.find(".php?") > -1:
-        result = False
-
-    return result
 
 def main():
     pages = crawl_site(page_list, 0)
     with open("wiki_pages.txt", "w") as fileh:
-        fileh.write("\n".join(str(item) for item in pages))
+        fileh.write("\n".join(str(item)[32:] for item in pages))
 
 
 main()
